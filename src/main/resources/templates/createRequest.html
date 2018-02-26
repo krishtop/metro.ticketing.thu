@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Metro ticketing service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css"/>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Moscow Metro</a>
+        </div>
+        <div id="navbar" class="collnavbar-collapseapse ">
+            <ul class="nav navbar-nav">
+                <li><a href="requestsList">Requests</a></li>
+                <li class="active"><a href="createRequest">Create request</a></li>
+                <li><a href="ticketRegistration">Ticket registration</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Create request</h1>
+    </div>
+
+    <form th:action="@{/createRequest}"
+          th:object="${requestView}" method="POST">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type="text" th:field="*{name}"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <input type="email" th:field="*{email}"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Role Id:</td>
+                <td>
+                    <input type="number" th:field="*{roleId}"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Create"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br/>
+
+    <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+    </div>
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

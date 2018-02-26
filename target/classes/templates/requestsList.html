@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Metro ticketing service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Moscow Metro</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="requestsList">Requests</a></li>
+                <li><a href="createRequest">Create request</a></li>
+                <li><a href="ticketRegistration">Ticket registration</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div layout:fragment="content">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Status</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role id</th>
+            <th width="100"></th>
+            <th width="100"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="request : ${requests}">
+            <td th:utext="${request.id}">...</td>
+            <td th:utext="${request.requestStatus}">...</td>
+            <td th:utext="${request.name}">...</td>
+            <td th:utext="${request.email}">...</td>
+            <td th:utext="${request.roleId}">...</td>
+            <td><a th:href="@{'/asseptRequest/' + ${request.id}}" class="btn btn-success custom-width"> Assept</a></td>
+            <td><a th:href="@{'/rejectRequest/' + ${request.id}}" class="btn btn-danger custom-width"> Reject</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

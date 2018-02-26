@@ -1,0 +1,51 @@
+DROP TABLE IF EXISTS Request CASCADE;
+DROP TABLE IF EXISTS Action_Role CASCADE;
+DROP TABLE IF EXISTS Role CASCADE ;
+DROP TABLE IF EXISTS Action;
+DROP TABLE IF EXISTS Ticket;
+DROP TABLE IF EXISTS Tariff;
+
+
+CREATE TABLE Action(
+  id BIGSERIAL,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Role(
+  id BIGSERIAL,
+  name VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Action_Role (
+  action_id BIGINT REFERENCES Action,
+  role_id BIGINT REFERENCES Role,
+  PRIMARY KEY (action_id, role_id)
+);
+
+CREATE TABLE Request(
+  id BIGSERIAL PRIMARY KEY,
+  request_status VARCHAR(8) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  role_id BIGINT NOT NULL REFERENCES Role
+);
+
+CREATE TABLE Tariff(
+  id BIGSERIAL,
+  tariff_type VARCHAR(4) NOT NULL,
+  day_Count INT NULL,
+  trips_Count INT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Ticket(
+  id BIGSERIAL PRIMARY KEY,
+  activated boolean NOT NULL,
+  remining_trips INT,
+  exp_Time date,
+  tariff_id BIGINT NOT NULL REFERENCES Tariff
+);
+
